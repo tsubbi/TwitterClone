@@ -56,6 +56,12 @@
 		A155E328268A5647007A7E80 /* Twitter Clone */ = {
 			isa = PBXGroup;
 			children = (
+				A155E344268A57FC007A7E80 /* Model */,
+				A155E343268A57F7007A7E80 /* View */,
+				A155E342268A57F2007A7E80 /* ViewModel */,
+				A155E341268A57EF007A7E80 /* Controller */,
+				A155E340268A57EA007A7E80 /* API */,
+				A155E33E268A57DD007A7E80 /* Utils */,
 				A155E329268A5647007A7E80 /* AppDelegate.swift */,
 				A155E32B268A5647007A7E80 /* SceneDelegate.swift */,
 				A155E32D268A5647007A7E80 /* ViewController.swift */,
@@ -65,6 +71,48 @@
 				A155E337268A5649007A7E80 /* Info.plist */,
 			);
 			path = "Twitter Clone";
+			sourceTree = "<group>";
+		};
+		A155E33E268A57DD007A7E80 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A155E340268A57EA007A7E80 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A155E341268A57EF007A7E80 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A155E342268A57F2007A7E80 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A155E343268A57F7007A7E80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A155E344268A57FC007A7E80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
