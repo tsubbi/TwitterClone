@@ -15,11 +15,11 @@ class TwitterTabBarViewController: UITabBarController {
         let btn = UIButton(type: .system)
         btn.tintColor = .white
         btn.backgroundColor = ProjectColor.twitterBlue
-        btn.setImage(UIImage(named: ImageAsset.ButtonImages.addTweet.rawValue), for: .normal)
+        btn.setImage(ImageAsset.getImage(.addTweet), for: .normal)
         btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return btn
     }()
-    let tweetBtnWidth: CGFloat = 56
+    let tweetBtnSize: CGFloat = 56
     let tweetBtnFromBottom: CGFloat = -64
     let tweetBtnFromRight: CGFloat = -16
     
@@ -32,12 +32,12 @@ class TwitterTabBarViewController: UITabBarController {
     
     // MARK: - Helpers
     func configViewControllers() {
-        let route = ImageAsset.TabBarImages.self
+        let route = ImageAsset.self
         // trasform vc into nav controller
-        self.viewControllers = [(FeedController(), UIImage(named: route.home.rawValue)),
-                                (ExploreViewController(), UIImage(named: route.explore.rawValue)),
-                                (NotificationController(), UIImage(named: route.notifications.rawValue)),
-                                (ConversationController(), UIImage(named: route.conversations.rawValue))]
+        self.viewControllers = [(FeedController(), route.getImage(.home)),
+                                (ExploreViewController(), route.getImage(.explore)),
+                                (NotificationController(), route.getImage(.notifications)),
+                                (ConversationController(), route.getImage(.conversations))]
             .map({
                 let nav = UINavigationController(rootViewController: $0)
                 nav.tabBarItem.image = $1
@@ -48,14 +48,14 @@ class TwitterTabBarViewController: UITabBarController {
     
     func setupUI() {
         self.view.addSubview(addTweetButton)
-        self.addTweetButton.layer.cornerRadius = self.tweetBtnWidth.half()
+        self.addTweetButton.layer.cornerRadius = self.tweetBtnSize.half()
     }
     
     func layoutUI() {
-        self.addTweetButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(self.tweetBtnWidth)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(self.tweetBtnFromBottom)
-            make.right.equalTo(self.view.safeAreaLayoutGuide).offset(self.tweetBtnFromRight)
+        self.addTweetButton.snp.makeConstraints {
+            $0.width.height.equalTo(self.tweetBtnSize)
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(self.tweetBtnFromBottom)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide).offset(self.tweetBtnFromRight)
         }
     }
     

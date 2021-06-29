@@ -7,5 +7,6 @@ target 'Twitter Clone' do
 
   # Pods for Twitter Clone
   pod 'SnapKit'
+  pod 'IQKeyboardManagerSwift'
 
 end
