@@ -21,6 +21,11 @@
 		A155E35B268A7AB4007A7E80 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E35A268A7AB4007A7E80 /* Colors.swift */; };
 		A155E35E268A7FA0007A7E80 /* ImageAssetsName.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E35D268A7FA0007A7E80 /* ImageAssetsName.swift */; };
 		A155E361268A8A57007A7E80 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E360268A8A57007A7E80 /* CGFloatExtension.swift */; };
+		A155E368268AA86B007A7E80 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E367268AA86B007A7E80 /* LoginViewController.swift */; };
+		A155E36D268AAF88007A7E80 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E36C268AAF88007A7E80 /* RegisterViewController.swift */; };
+		A155E377268B9E03007A7E80 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E376268B9E03007A7E80 /* InputContainerView.swift */; };
+		A155E37D268BBC66007A7E80 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E37C268BBC66007A7E80 /* AuthBaseViewController.swift */; };
+		A155E383268BC5EA007A7E80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E382268BC5EA007A7E80 /* AuthSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,11 @@
 		A155E35A268A7AB4007A7E80 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A155E35D268A7FA0007A7E80 /* ImageAssetsName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAssetsName.swift; sourceTree = "<group>"; };
 		A155E360268A8A57007A7E80 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		A155E367268AA86B007A7E80 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A155E36C268AAF88007A7E80 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A155E376268B9E03007A7E80 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
+		A155E37C268BBC66007A7E80 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
+		A155E382268BC5EA007A7E80 /* AuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettings.swift; sourceTree = "<group>"; };
 		E5ED813C0D0397578D9ED0BC /* Pods-Twitter Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter Clone.release.xcconfig"; path = "Target Support Files/Pods-Twitter Clone/Pods-Twitter Clone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +145,7 @@
 				A155E34E268A5F62007A7E80 /* ExploreViewController.swift */,
 				A155E351268A5FC1007A7E80 /* NotificationController.swift */,
 				A155E354268A5FFF007A7E80 /* ConversationController.swift */,
+				A155E36A268AA8C0007A7E80 /* Auth */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,6 +160,7 @@
 		A155E343268A57F7007A7E80 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A155E37A268BB53F007A7E80 /* Shared */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +170,25 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A155E36A268AA8C0007A7E80 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A155E367268AA86B007A7E80 /* LoginViewController.swift */,
+				A155E382268BC5EA007A7E80 /* AuthSettings.swift */,
+				A155E36C268AAF88007A7E80 /* RegisterViewController.swift */,
+				A155E37C268BBC66007A7E80 /* AuthBaseViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A155E37A268BB53F007A7E80 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A155E376268B9E03007A7E80 /* InputContainerView.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,14 +307,19 @@
 			files = (
 				A155E352268A5FC1007A7E80 /* NotificationController.swift in Sources */,
 				A155E35B268A7AB4007A7E80 /* Colors.swift in Sources */,
+				A155E37D268BBC66007A7E80 /* AuthBaseViewController.swift in Sources */,
 				A155E32A268A5647007A7E80 /* AppDelegate.swift in Sources */,
 				A155E346268A5C01007A7E80 /* TwitterTabBarViewController.swift in Sources */,
+				A155E377268B9E03007A7E80 /* InputContainerView.swift in Sources */,
+				A155E383268BC5EA007A7E80 /* AuthSettings.swift in Sources */,
 				A155E34F268A5F62007A7E80 /* ExploreViewController.swift in Sources */,
 				A155E32C268A5647007A7E80 /* SceneDelegate.swift in Sources */,
 				A155E361268A8A57007A7E80 /* CGFloatExtension.swift in Sources */,
 				A155E35E268A7FA0007A7E80 /* ImageAssetsName.swift in Sources */,
 				A155E355268A5FFF007A7E80 /* ConversationController.swift in Sources */,
+				A155E36D268AAF88007A7E80 /* RegisterViewController.swift in Sources */,
 				A155E34B268A5E9E007A7E80 /* FeedController.swift in Sources */,
+				A155E368268AA86B007A7E80 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -415,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -440,7 +476,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.project-clone.Twitter-Clone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -459,7 +495,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.project-clone.Twitter-Clone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

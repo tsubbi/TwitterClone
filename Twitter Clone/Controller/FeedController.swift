@@ -18,7 +18,7 @@ class FeedController: UIViewController {
     // MARK: - Helpers
     func setupUI() {
         self.view.backgroundColor = .white
-        let iv = UIImageView(image: UIImage(named: ImageAsset.TitleImage.twitterLogo.rawValue))
+        let iv = UIImageView(image: ImageAsset.getImage(.twitterLogo))
         iv.contentMode = .scaleAspectFit
         self.navigationItem.titleView = iv
     }
