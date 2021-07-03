@@ -6,7 +6,14 @@ target 'Twitter Clone' do
   use_frameworks!
 
   # Pods for Twitter Clone
-  pod 'SnapKit'
-  pod 'IQKeyboardManagerSwift'
 
+	# This is for positioning
+	pod 'SnapKit'
+	# This is for automatically adjust view when keyboard popped
+	pod 'IQKeyboardManagerSwift'
+	# This is the firebase service
+  	pod 'Firebase/Core'
+  	pod 'Firebase/Database'
+  	pod 'Firebase/Storage'
+  	pod 'Firebase/Auth'
 end

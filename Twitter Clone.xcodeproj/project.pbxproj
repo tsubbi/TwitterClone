@@ -26,6 +26,11 @@
 		A155E377268B9E03007A7E80 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E376268B9E03007A7E80 /* InputContainerView.swift */; };
 		A155E37D268BBC66007A7E80 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E37C268BBC66007A7E80 /* AuthBaseViewController.swift */; };
 		A155E383268BC5EA007A7E80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E382268BC5EA007A7E80 /* AuthSettings.swift */; };
+		A155E39E2690409F007A7E80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A155E39D2690409F007A7E80 /* GoogleService-Info.plist */; };
+		A155E3C52691111E007A7E80 /* FirAuthErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155E3C42691111E007A7E80 /* FirAuthErrorExtension.swift */; };
+		A163469426935B4100EDBBDA /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163469326935B4100EDBBDA /* FirebaseDatabase.swift */; };
+		A1634697269360AA00EDBBDA /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1634696269360AA00EDBBDA /* FirebaseStorage.swift */; };
+		A16346F42693F29A00EDBBDA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16346F32693F29A00EDBBDA /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,11 @@
 		A155E376268B9E03007A7E80 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
 		A155E37C268BBC66007A7E80 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
 		A155E382268BC5EA007A7E80 /* AuthSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettings.swift; sourceTree = "<group>"; };
+		A155E39D2690409F007A7E80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A155E3C42691111E007A7E80 /* FirAuthErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirAuthErrorExtension.swift; sourceTree = "<group>"; };
+		A163469326935B4100EDBBDA /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
+		A1634696269360AA00EDBBDA /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
+		A16346F32693F29A00EDBBDA /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		E5ED813C0D0397578D9ED0BC /* Pods-Twitter Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter Clone.release.xcconfig"; path = "Target Support Files/Pods-Twitter Clone/Pods-Twitter Clone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,11 +120,8 @@
 				A155E341268A57EF007A7E80 /* Controller */,
 				A155E340268A57EA007A7E80 /* API */,
 				A155E33E268A57DD007A7E80 /* Utils */,
-				A155E329268A5647007A7E80 /* AppDelegate.swift */,
-				A155E32B268A5647007A7E80 /* SceneDelegate.swift */,
-				A155E32F268A5647007A7E80 /* Main.storyboard */,
+				A155E3AE269042A9007A7E80 /* SupportedFiles */,
 				A155E332268A5649007A7E80 /* Assets.xcassets */,
-				A155E334268A5649007A7E80 /* LaunchScreen.storyboard */,
 				A155E337268A5649007A7E80 /* Info.plist */,
 			);
 			path = "Twitter Clone";
@@ -123,9 +130,11 @@
 		A155E33E268A57DD007A7E80 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A155E3C3269110C9007A7E80 /* Extensions */,
 				A155E35A268A7AB4007A7E80 /* Colors.swift */,
 				A155E35D268A7FA0007A7E80 /* ImageAssetsName.swift */,
-				A155E360268A8A57007A7E80 /* CGFloatExtension.swift */,
+				A163469326935B4100EDBBDA /* FirebaseDatabase.swift */,
+				A1634696269360AA00EDBBDA /* FirebaseStorage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -133,6 +142,7 @@
 		A155E340268A57EA007A7E80 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A16346F32693F29A00EDBBDA /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -189,6 +199,27 @@
 				A155E376268B9E03007A7E80 /* InputContainerView.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		A155E3AE269042A9007A7E80 /* SupportedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A155E329268A5647007A7E80 /* AppDelegate.swift */,
+				A155E39D2690409F007A7E80 /* GoogleService-Info.plist */,
+				A155E32B268A5647007A7E80 /* SceneDelegate.swift */,
+				A155E32F268A5647007A7E80 /* Main.storyboard */,
+				A155E334268A5649007A7E80 /* LaunchScreen.storyboard */,
+			);
+			path = SupportedFiles;
+			sourceTree = "<group>";
+		};
+		A155E3C3269110C9007A7E80 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A155E3C42691111E007A7E80 /* FirAuthErrorExtension.swift */,
+				A155E360268A8A57007A7E80 /* CGFloatExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A155E336268A5649007A7E80 /* LaunchScreen.storyboard in Resources */,
+				A155E39E2690409F007A7E80 /* GoogleService-Info.plist in Resources */,
 				A155E333268A5649007A7E80 /* Assets.xcassets in Resources */,
 				A155E331268A5647007A7E80 /* Main.storyboard in Resources */,
 			);
@@ -306,15 +338,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A155E352268A5FC1007A7E80 /* NotificationController.swift in Sources */,
+				A163469426935B4100EDBBDA /* FirebaseDatabase.swift in Sources */,
+				A1634697269360AA00EDBBDA /* FirebaseStorage.swift in Sources */,
 				A155E35B268A7AB4007A7E80 /* Colors.swift in Sources */,
 				A155E37D268BBC66007A7E80 /* AuthBaseViewController.swift in Sources */,
 				A155E32A268A5647007A7E80 /* AppDelegate.swift in Sources */,
+				A16346F42693F29A00EDBBDA /* AuthService.swift in Sources */,
 				A155E346268A5C01007A7E80 /* TwitterTabBarViewController.swift in Sources */,
 				A155E377268B9E03007A7E80 /* InputContainerView.swift in Sources */,
 				A155E383268BC5EA007A7E80 /* AuthSettings.swift in Sources */,
 				A155E34F268A5F62007A7E80 /* ExploreViewController.swift in Sources */,
 				A155E32C268A5647007A7E80 /* SceneDelegate.swift in Sources */,
 				A155E361268A8A57007A7E80 /* CGFloatExtension.swift in Sources */,
+				A155E3C52691111E007A7E80 /* FirAuthErrorExtension.swift in Sources */,
 				A155E35E268A7FA0007A7E80 /* ImageAssetsName.swift in Sources */,
 				A155E355268A5FFF007A7E80 /* ConversationController.swift in Sources */,
 				A155E36D268AAF88007A7E80 /* RegisterViewController.swift in Sources */,

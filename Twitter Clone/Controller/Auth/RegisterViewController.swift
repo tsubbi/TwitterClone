@@ -15,6 +15,7 @@ class RegisterViewController: AuthBaseViewController {
     private lazy var fullNameContainerView = InputContainerView(display: ImageAsset.getImage(.userIcon), of: .fullName)
     private lazy var userNameContainerView = InputContainerView(display: ImageAsset.getImage(.userIcon), of: .userName)
     private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
     
     init() {
         super.init(.register)
@@ -36,7 +37,37 @@ class RegisterViewController: AuthBaseViewController {
     }
     
     @objc func handleRegister() {
-        print("Registoring....")
+        #warning("""
+            Validation Check on Textfield:
+            1. make sure the textfield is NOT empty
+            2. make sure the string is correspond to correct type
+        """)
+        // need to compress the data or bandwidth and storage will be used quickly
+        guard let profileImageData = self.profileImage?.jpegData(compressionQuality: 0.3) else { return }
+        #if DEBUG
+        let email = "leader@platelet.body.com"
+        let password = "platelet"
+        let fullName = "Little Leader"
+        let userName = "Platelet Leader"
+        #else
+        guard let email = self.emailContainerView.textField.text else { return }
+        guard let password = self.passwordContainerView.textField.text else { return }
+        guard let fullName = self.fullNameContainerView.textField.text else { return }
+        guard let userName = self.userNameContainerView.textField.text else { return }
+        #endif
+        
+        let user = AuthCredentialModel(email: email,
+                                       password: password,
+                                       fullName: fullName,
+                                       userName: userName,
+                                       imageData: profileImageData)
+        AuthService.shared.registerUser(of: user, errorHandleView: self) { (error, reference) -> Void in
+            // update users
+            guard let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? TwitterTabBarViewController else { return }
+            tabVC.configViewControllerWhenLoggedIn()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func addProfileImage() {
@@ -67,6 +98,7 @@ class RegisterViewController: AuthBaseViewController {
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
+        self.profileImage = profileImage
         
         // this will render the image properly
         self.headerButton?.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
