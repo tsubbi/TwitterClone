@@ -25,13 +25,24 @@ class TwitterTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configViewControllers()
-        setupUI()
-        layoutUI()
+        if !AuthService.shared.isUserLogged {
+            configViewControllerWhenNeedAuth()
+        } else {
+            configViewControllerWhenLoggedIn()
+        }
+    }
+    
+    func configViewControllerWhenNeedAuth () {
+        DispatchQueue.main.async {
+            self.view.backgroundColor = ProjectColor.twitterBlue
+            let nav = UINavigationController(rootViewController: LoginViewController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
     }
     
     // MARK: - Helpers
-    func configViewControllers() {
+    func configViewControllerWhenLoggedIn() {
         let route = ImageAsset.self
         // trasform vc into nav controller
         self.viewControllers = [(FeedController(), route.getImage(.home)),
@@ -44,14 +55,17 @@ class TwitterTabBarViewController: UITabBarController {
                 nav.navigationBar.tintColor = .white
                 return nav
             })
+        
+        setupUI()
+        layoutUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
         self.view.addSubview(addTweetButton)
         self.addTweetButton.layer.cornerRadius = self.tweetBtnSize.half()
     }
     
-    func layoutUI() {
+    private func layoutUI() {
         self.addTweetButton.snp.makeConstraints {
             $0.width.height.equalTo(self.tweetBtnSize)
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(self.tweetBtnFromBottom)

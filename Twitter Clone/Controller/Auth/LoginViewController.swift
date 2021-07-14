@@ -28,7 +28,26 @@ class LoginViewController: AuthBaseViewController {
     
     // MARK: - Selector
     @objc func handleLogin() {
-        print("have some login process")
+        #if DEBUG
+        let email = "leader@platelet.body.com"
+        let password = "platelet"
+        #else
+        guard let email = self.emailContainerView.textField.text else { return }
+        guard let password = self.passwordContainerView.textField.text else { return }
+        #endif
+        
+        AuthService.shared.logUserIn(withEmail: email, and: password) { (result, error) in
+            if let error = error {
+                AuthService.shared.handleError(error, in: self)
+                return
+            }
+            
+            // https://stackoverflow.com/a/58031897/14939990
+            guard let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? TwitterTabBarViewController else { return }
+            tabVC.configViewControllerWhenLoggedIn()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func pushToRegister() {
