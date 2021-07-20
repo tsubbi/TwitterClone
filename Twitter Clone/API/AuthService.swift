@@ -13,10 +13,20 @@ struct AuthService {
         return Auth.auth().currentUser != nil
     }
     
+    /// User login process
+    /// - Parameters:
+    ///   - email: The email of user
+    ///   - password: the password of user
+    ///   - block: actions after the process is completed
     func logUserIn(withEmail email: String, and password: String, completion block: @escaping ((AuthDataResult?, Error?) -> Void)) {
         Auth.auth().signIn(withEmail: email, password: password, completion: block)
     }
     
+    /// User register process
+    /// - Parameters:
+    ///   - user: User model that contains user's info
+    ///   - vc: the targeting view will display message if error happens
+    ///   - completetion: actions after the process is completed
     func registerUser(of user: AuthCredentialModel, errorHandleView vc: UIViewController, completetion: @escaping(Error?, DatabaseReference) -> Void) {
         let fileName = NSUUID().uuidString
         
@@ -33,6 +43,7 @@ struct AuthService {
                     }
 
                     guard let uid = result?.user.uid else { return }
+                    // the updated values need to be in dictionary form
                     let values = ["email": user.email, "userName": user.userName, "fullName": user.fullName, "profileImageUrl": imgURL]
                     // update the email, username, and full name to firebase database after it's successfully create an account
                     FirDatabase.shared.updateNode(main: .users, in: uid, with: values, completeion: completetion)
@@ -41,10 +52,22 @@ struct AuthService {
         }
     }
     
+    // this is used as api because I want to keep this simple to decouple the firebase and vc
+    // https://gist.github.com/nelglez/7901c12f550cd241e8cf8a55381ae842
+    /// Display message when error happens
+    /// - Parameters:
+    ///   - error: firebase error
+    ///   - viewController: targeting VC
     func handleError(_ error: Error, in viewController: UIViewController) {
-        Auth.auth().handleFireAuthError(error: error, in: viewController)
+        if let error = AuthErrorCode(rawValue: error._code) {
+            let alert = UIAlertController(title: "Error", message: error.errorMessage, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            viewController.present(alert, animated: true, completion: nil)
+        }
     }
     
+    /// to sign out user
     func logoutUser() {
         do {
             try Auth.auth().signOut()
@@ -60,4 +83,28 @@ struct AuthCredentialModel {
     let fullName: String
     let userName: String
     let imageData: Data
+}
+
+/// This is the error code from firebase auth
+extension AuthErrorCode {
+    var errorMessage: String {
+        switch self {
+        case .emailAlreadyInUse:
+            return "The email is already in use with another account. Pick another email!"
+        case .userNotFound:
+            return "Account not found for the specific user. Please check and try again."
+        case .userDisabled:
+            return "Your account has been disabled. Please contact support."
+        case .invalidEmail, .invalidSender, .invalidRecipientEmail:
+            return "Please enter a valid email."
+        case .networkError:
+            return "Network error. Please try again."
+        case .weakPassword:
+            return "Your password is too weak. The password must be 6 characters long or more."
+        case .wrongPassword:
+            return "Your password or email is incorrect."
+        default:
+            return "Sorry, something went wrong."
+        }
+    }
 }

@@ -9,13 +9,45 @@ import UIKit
 
 class InputContainerView: UIView {
     
+    enum InputfieldType {
+        case email
+        case password
+        case fullName
+        case userName
+        
+        var placeholderText: String {
+            switch self {
+            case .email:
+                return "Email"
+            case .password:
+                return "Password"
+            case .fullName:
+                return "Full Name"
+            case .userName:
+                return "User Name"
+            }
+        }
+        
+        var displayImage: UIImage? {
+            let route = ImageAsset.self
+            switch self {
+            case .email:
+                return route.getImage(.emailIcon)
+            case .fullName,
+                 .userName:
+                return route.getImage(.userIcon)
+            case .password:
+                return route.getImage(.passwordIcon)
+            }
+        }
+    }
+    
     private(set) var imageView: UIImageView
     private(set) var textField: UITextField
     private let dividerView: UIView
     
-    
-    init(frame: CGRect = .zero, display image: UIImage?, of type: InputfieldType) {
-        self.imageView = UIImageView(image: image)
+    init(frame: CGRect = .zero, of type: InputfieldType) {
+        self.imageView = UIImageView(image: type.displayImage)
         self.textField = UITextField()
         self.dividerView = UIView()
         super.init(frame: frame)
@@ -63,26 +95,6 @@ class InputContainerView: UIView {
             $0.width.equalTo(self)
             $0.height.equalTo(0.75)
             $0.bottom.leading.trailing.equalTo(self)
-        }
-    }
-    
-    enum InputfieldType {
-        case email
-        case password
-        case fullName
-        case userName
-        
-        var placeholderText: String {
-            switch self {
-            case .email:
-                return "Email"
-            case .password:
-                return "Password"
-            case .fullName:
-                return "Full Name"
-            case .userName:
-                return "User Name"
-            }
         }
     }
 }

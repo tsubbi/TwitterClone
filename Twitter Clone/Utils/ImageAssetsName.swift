@@ -29,6 +29,9 @@ enum ImageAsset {
         case userIcon = "ic_person_outline"
     }
     
+    /// retrieve image from names
+    /// - Parameter type: accroding to the names of Image name
+    /// - Returns: image accroding to the above enum
     static func getImage(_ type: ImageName) -> UIImage? {
         return UIImage(named: type.rawValue)
     }

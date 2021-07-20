@@ -10,10 +10,10 @@ import UIKit
 class RegisterViewController: AuthBaseViewController {
 
     // MARK: - Properties
-    private lazy var emailContainerView = InputContainerView(display: ImageAsset.getImage(.emailIcon), of: .email)
-    private lazy var passwordContainerView = InputContainerView(display: ImageAsset.getImage(.passwordIcon), of: .password)
-    private lazy var fullNameContainerView = InputContainerView(display: ImageAsset.getImage(.userIcon), of: .fullName)
-    private lazy var userNameContainerView = InputContainerView(display: ImageAsset.getImage(.userIcon), of: .userName)
+    private lazy var emailContainerView = InputContainerView(of: .email)
+    private lazy var passwordContainerView = InputContainerView(of: .password)
+    private lazy var fullNameContainerView = InputContainerView(of: .fullName)
+    private lazy var userNameContainerView = InputContainerView(of: .userName)
     private let imagePicker = UIImagePickerController()
     private var profileImage: UIImage?
     
@@ -44,6 +44,7 @@ class RegisterViewController: AuthBaseViewController {
         """)
         // need to compress the data or bandwidth and storage will be used quickly
         guard let profileImageData = self.profileImage?.jpegData(compressionQuality: 0.3) else { return }
+        // this is the preset user to see if it is set correctly. Only works in develop mode
         #if DEBUG
         let email = "leader@platelet.body.com"
         let password = "platelet"

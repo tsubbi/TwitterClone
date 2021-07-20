@@ -10,8 +10,8 @@ import UIKit
 class LoginViewController: AuthBaseViewController {
     
     // MARK: - Properties
-    private lazy var emailContainerView = InputContainerView(display: ImageAsset.getImage(.emailIcon), of: .email)
-    private lazy var passwordContainerView = InputContainerView(display: ImageAsset.getImage(.passwordIcon), of: .password)
+    private lazy var emailContainerView = InputContainerView(of: .email)
+    private lazy var passwordContainerView = InputContainerView(of: .password)
     
     init() {
         super.init(.login)
