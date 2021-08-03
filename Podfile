@@ -7,13 +7,15 @@ target 'Twitter Clone' do
 
   # Pods for Twitter Clone
 
-	# This is for positioning
+	# positioning
 	pod 'SnapKit'
-	# This is for automatically adjust view when keyboard popped
+	# keyboard and view adjustment
 	pod 'IQKeyboardManagerSwift'
-	# This is the firebase service
+	# firebase service
   	pod 'Firebase/Core'
   	pod 'Firebase/Database'
   	pod 'Firebase/Storage'
   	pod 'Firebase/Auth'
+	# Image Download
+	pod 'SDWebImage'
 end

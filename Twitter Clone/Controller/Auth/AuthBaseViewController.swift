@@ -7,10 +7,14 @@
 
 import UIKit
 
+// this is the basic view of the auth section.
+/// contains blue background, header image view, a stack view, an action button and a button that change views between register and login
 class AuthBaseViewController: UIViewController {
     // MARK: - Properties
     private let setting: AuthSettingType
+    // this will be optional because in register, do not need image view
     var headerImageView: UIImageView?
+    // this is optional because it is not active in
     var headerButton: UIButton?
     var inputStackView: UIStackView = {
         let stack = UIStackView()
@@ -54,7 +58,7 @@ class AuthBaseViewController: UIViewController {
     }
     
     private func setUI() {
-        if setting == .login {
+        if self.setting == .login {
             self.headerImageView = UIImageView(image: ImageAsset.getImage(.loginLogo))
             self.headerImageView?.contentMode = .scaleAspectFit
             self.headerImageView?.clipsToBounds = true
@@ -89,6 +93,7 @@ class AuthBaseViewController: UIViewController {
     }
     
     private func layoutUI() {
+        // header view will be either a button or an image view
         let headerView = self.view.subviews.first!
         let safeArea = self.view.safeAreaLayoutGuide
         headerView.snp.makeConstraints {
@@ -97,6 +102,7 @@ class AuthBaseViewController: UIViewController {
             $0.width.height.equalTo(setting.logoSize)
         }
         self.inputStackView.snp.makeConstraints {
+            // if header view is a button, stack view will be 32 pt away from buttom vertically
             if headerView is UIButton {
                 $0.top.equalTo(headerView.snp.bottom).offset(setting.spaceFromSide)
             } else {

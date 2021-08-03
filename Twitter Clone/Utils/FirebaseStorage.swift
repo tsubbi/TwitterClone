@@ -26,5 +26,5 @@ class FirStorage {
 }
 
 enum FirStorageNode: String {
-    case profile_images
+    case profileImages = "profile_images"
 }
