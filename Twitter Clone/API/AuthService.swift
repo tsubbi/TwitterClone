@@ -27,18 +27,18 @@ struct AuthService {
     ///   - user: User model that contains user's info
     ///   - vc: the targeting view will display message if error happens
     ///   - completetion: actions after the process is completed
-    func registerUser(of user: AuthCredentialModel, errorHandleView vc: UIViewController, completetion: @escaping(Error?, DatabaseReference) -> Void) {
+    func registerUser(of user: AuthCredentialModel, errorHandleView vc: UIViewController, completetion: @escaping (Result<DatabaseReference, Error>) -> Void) {
         let fileName = NSUUID().uuidString
         
         // upload image first
-        FirStorage.shared.updateNode(main: .profile_images, in: fileName, with: user.imageData) { (meta, error) in
+        FirStorage.shared.updateNode(main: .profileImages, in: fileName, with: user.imageData) { _ in
             // and make sure we can get download images
-            FirStorage.shared.getReference(of: .profile_images, with: fileName).downloadURL { (url, error) in
+            FirStorage.shared.getReference(of: .profileImages, with: fileName).downloadURL { (url, error) in
                 guard let imgURL = url?.absoluteString else { return }
                 // create the user profile
                 Auth.auth().createUser(withEmail: user.email, password: user.password) { (result, error) in
                     if let error = error {
-                        self.handleError(error, in: vc)
+                        completetion(.failure(error))
                         return
                     }
 

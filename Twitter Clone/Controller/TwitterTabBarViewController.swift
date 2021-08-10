@@ -16,7 +16,7 @@ class TwitterTabBarViewController: UITabBarController {
         btn.tintColor = .white
         btn.backgroundColor = ProjectColor.twitterBlue
         btn.setImage(ImageAsset.getImage(.addTweet), for: .normal)
-        btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(addTweetAction), for: .touchUpInside)
         return btn
     }()
     private let tweetBtnSize: CGFloat = 56
@@ -94,7 +94,12 @@ class TwitterTabBarViewController: UITabBarController {
     }
     
     // MARK: - Selector
-    @objc func buttonAction() {
-        print("Add tweet")
+    @objc func addTweetAction() {
+        // since the profile already fetch, there is no need to call the api again.
+        guard let userProfile = self.userProfile else { return }
+        // pass the profile to next page to reduce the usage of network data
+        let nav = UINavigationController(rootViewController: UploadTweetViewController(profile: userProfile))
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
     }
 }
