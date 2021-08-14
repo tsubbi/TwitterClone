@@ -15,9 +15,20 @@ class FirStorage {
     init() {
         self.reference = Storage.storage().reference()
     }
-    
-    func updateNode(main node: FirStorageNode, in name: String, with data: Data, completeion block: @escaping (StorageMetadata?, Error?) -> Void) {
-        self.reference.child(node.rawValue).child(name).putData(data, metadata: nil, completion: block)
+//    StorageMetadata?, Error?
+    func updateNode(main node: FirStorageNode, in name: String, with data: Data, completeion block: @escaping (Result<StorageMetadata, Error>) -> Void) {
+        self.reference.child(node.rawValue).child(name).putData(data, metadata: nil) { (meta, error) in
+            if let error = error {
+                block(.failure(error))
+                return
+            }
+            
+            if meta == nil {
+                block(.failure(FirStorageError.noData))
+            }
+            
+            block(.success(meta!))
+        }
     }
     /// get reference to avoid spelling error
     func getReference(of node: FirStorageNode, with child: String) -> StorageReference {
@@ -27,4 +38,15 @@ class FirStorage {
 
 enum FirStorageNode: String {
     case profileImages = "profile_images"
+}
+
+enum FirStorageError: Error {
+    case noData
+    
+    var message: String {
+        switch self {
+        case .noData:
+            return "Unable to fetch data from storage"
+        }
+    }
 }

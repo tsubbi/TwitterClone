@@ -62,12 +62,17 @@ class RegisterViewController: AuthBaseViewController {
                                        fullName: fullName,
                                        userName: userName,
                                        imageData: profileImageData)
-        AuthService.shared.registerUser(of: user, errorHandleView: self) { (error, reference) -> Void in
-            // update users
-            guard let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? TwitterTabBarViewController else { return }
-            tabVC.configViewControllerWhenLoggedIn()
-            
-            self.dismiss(animated: true, completion: nil)
+
+        AuthService.shared.registerUser(of: user, errorHandleView: self) { (result) in
+            switch result {
+            case .failure(let error):
+                AuthService.shared.handleError(error, in: self)
+            case .success(_):
+                guard let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? TwitterTabBarViewController else { return }
+
+                tabVC.configViewControllerWhenNeedAuth()
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
