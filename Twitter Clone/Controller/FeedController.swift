@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class FeedController: UIViewController {
+class FeedController: UICollectionViewController {
     // MARK: - Properties
     let profileImageView: UIImageView = {
         let profileImageSize: CGFloat = 32
@@ -36,16 +36,57 @@ class FeedController: UIViewController {
             }
         }
     }
+    var tweets: [TweetViewModel] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
 
-    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
+        fetchTweet()
     }
+    
+    // MARK: - API
+    func fetchTweet() {
+        TweetService.shared.fetchTweets { (tweetViewModels) in
+            self.tweets = tweetViewModels
+        }
+    }
+    
     // MARK: - Helpers
     func setupUI() {
-        self.view.backgroundColor = .white
+        self.collectionView.backgroundColor = .white
+        let cellID = NSStringFromClass(TweetCollectionViewCell.self)
+        self.collectionView.register(TweetCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        
         self.navigationItem.titleView = self.twitterLogoImageView
+    }
+}
+
+// MARK: UICollection Data Source
+extension FeedController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.tweets.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellID = NSStringFromClass(TweetCollectionViewCell.self)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! TweetCollectionViewCell
+        cell.updateCell(viewModel: tweets[indexPath.row])
+        return cell
+    }
+}
+
+// MARK: UICollection Delegate
+
+
+// MARK: - UICollection View Flow Layout
+#warning("chenge to new uicollectionvew api")
+extension FeedController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width, height: 120)
     }
 }

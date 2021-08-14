@@ -45,6 +45,12 @@ class FirDatabase {
             block(.success(ref))
         }
     }
+    
+    func fetchTweet(of node: FirDatabaseNode, completion block: @escaping (DataSnapshot) -> Void) {
+        self.reference.child(node.rawValue).observe(.childAdded) {
+            block($0)
+        }
+    }
 }
 
 enum FirDatabaseNode: String {

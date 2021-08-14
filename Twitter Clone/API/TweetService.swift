@@ -20,5 +20,19 @@ struct TweetService {
                                      "content": content]
         FirDatabase.shared.postTweet(main: .tweets, with: values, completion: block)
     }
+    
+    func fetchTweets(completion block:@escaping ([TweetViewModel]) -> Void) {
+        var tweets: [TweetViewModel] = []
+        FirDatabase.shared.fetchTweet(of: .tweets) { (snapshots) in
+            let tweetID = snapshots.key
+            let tweetData = TweetData(id: tweetID, tweetData: snapshots.value as Any)
+            
+            UserService.shared.fetchUser(uid: tweetData.tweetContent.uid) { (profile) in
+                let tweetViewModel = TweetViewModel(tweet: tweetData, user: profile)
+                tweets.append(tweetViewModel)
+                block(tweets)
+            }
+        }
+    }
 }
 

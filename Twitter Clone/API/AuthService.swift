@@ -12,6 +12,9 @@ struct AuthService {
     var isUserLogged: Bool {
         return Auth.auth().currentUser != nil
     }
+    var currentUserID: String? {
+        return Auth.auth().currentUser?.uid
+    }
     
     /// User login process
     /// - Parameters:

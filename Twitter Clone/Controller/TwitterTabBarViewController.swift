@@ -22,10 +22,10 @@ class TwitterTabBarViewController: UITabBarController {
     private let tweetBtnSize: CGFloat = 56
     private let tweetBtnFromBottom: CGFloat = -64
     private let tweetBtnFromRight: CGFloat = -16
-    private let feed = FeedController()
-    private let explore = ExploreViewController()
-    private let notification = NotificationController()
-    private let chat = ConversationController()
+    private let feed: FeedController
+    private let explore: ExploreViewController
+    private let notification: NotificationController
+    private let chat: ConversationController
     var userProfile: UserProfile? {
         didSet {
             // assign the fatched profile to feed controller
@@ -33,8 +33,21 @@ class TwitterTabBarViewController: UITabBarController {
         }
     }
     
+    init() {
+        self.feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.explore = ExploreViewController()
+        self.notification = NotificationController()
+        self.chat = ConversationController()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if !AuthService.shared.isUserLogged {
             // if user is not logged in handles login first
             configViewControllerWhenNeedAuth()
@@ -44,7 +57,8 @@ class TwitterTabBarViewController: UITabBarController {
     }
     
     func fetchUser() {
-        UserService.shared.fetchUser {
+        guard let uid = AuthService.shared.currentUserID else { return }
+        UserService.shared.fetchUser(uid: uid) {
             self.userProfile = $0
         }
     }

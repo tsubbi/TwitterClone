@@ -38,6 +38,7 @@ struct User {
 }
 
 extension User: Decodable {
+    // I do this custom init because I want to change from string to url
     init(from decoder: Decoder) throws {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)

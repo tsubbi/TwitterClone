@@ -27,18 +27,7 @@ class UploadTweetViewController: UIViewController {
         return btn
     }()
     
-    private let profileImageView: UIImageView = {
-        let dimentionSize: CGFloat = 48
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.snp.makeConstraints({
-            $0.width.height.equalTo(dimentionSize)
-        })
-        iv.layer.cornerRadius = dimentionSize/2
-        iv.backgroundColor = .systemOrange
-        return iv
-    }()
+    private let profileImageView = ProfileImageView()
     let inputTextView = TweetInputTextView()
 
     // MARK: - Life Cycle
@@ -61,6 +50,7 @@ class UploadTweetViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    // post tweet
     @objc func uploadTweet() {
         guard let tweetContent = self.inputTextView.text else { return }
         

@@ -15,6 +15,11 @@ enum ImageAsset {
         case conversations = "email_unselected"
         // MARK: - ButtonImages
         case addTweet = "new_tweet"
+        case comment = "comment"
+        case share = "share"
+        case like = "like"
+        case likeFilled = "like_filled"
+        case retweet = "retweet"
         // MARK: - Title Image
         /// blue body
         case twitterLogo = "Twitter_Logo_Blue"
