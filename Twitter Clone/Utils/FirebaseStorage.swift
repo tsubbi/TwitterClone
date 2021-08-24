@@ -15,7 +15,7 @@ class FirStorage {
     init() {
         self.reference = Storage.storage().reference()
     }
-//    StorageMetadata?, Error?
+    
     func updateNode(main node: FirStorageNode, in name: String, with data: Data, completeion block: @escaping (Result<StorageMetadata, Error>) -> Void) {
         self.reference.child(node.rawValue).child(name).putData(data, metadata: nil) { (meta, error) in
             if let error = error {

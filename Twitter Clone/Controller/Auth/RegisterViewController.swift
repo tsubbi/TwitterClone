@@ -41,6 +41,7 @@ class RegisterViewController: AuthBaseViewController {
             Validation Check on Textfield:
             1. make sure the textfield is NOT empty
             2. make sure the string is correspond to correct type
+            3. make sure user name is lower cased and no space
         """)
         // need to compress the data or bandwidth and storage will be used quickly
         guard let profileImageData = self.profileImage?.jpegData(compressionQuality: 0.3) else { return }
@@ -49,7 +50,7 @@ class RegisterViewController: AuthBaseViewController {
         let email = "leader@platelet.body.com"
         let password = "platelet"
         let fullName = "Little Leader"
-        let userName = "Platelet Leader"
+        let userName = "platelet_leader"
         #else
         guard let email = self.emailContainerView.textField.text else { return }
         guard let password = self.passwordContainerView.textField.text else { return }
