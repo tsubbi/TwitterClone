@@ -7,32 +7,14 @@
 
 import Foundation
 
-struct TweetData {
-    let tweetID: String
-    var tweetContent: Tweet
-    
-    init(id: String, tweetData: Any) {
-        self.tweetID = id
-        #warning("need to refactor!!!")
-        // refactor sample is: https://stackoverflow.com/a/53565810/14939990
-        // ===============================================================
-        // transform sanpshot to object
-        // https://stackoverflow.com/a/58510766/14939990
-        let defaultTweet = Tweet(content: "", likes: 0, retweetCount: 0, timestamp: nil, uid: "")
-        guard let data = try? JSONSerialization.data(withJSONObject: tweetData, options: []) else {
-            self.tweetContent = defaultTweet
-            return
-        }
-        self.tweetContent = JSONDecoder().decodeAndHandlesError(Tweet.self, from: data) ?? defaultTweet
-    }
-}
+class TweetData: DatabaseModel<Tweet> { }
 
-struct Tweet {
-    var content: String
-    var likes: Int
-    var retweetCount: Int
-    var timestamp: Date!
-    let uid: String
+class Tweet: NSObject, Decodable {
+    var content: String = ""
+    var likes: Int = 0
+    var retweetCount: Int = 0
+    var timestamp: Date? = nil
+    var uid: String = ""
     
     private enum CodingKeys: String, CodingKey {
         case content
@@ -41,10 +23,9 @@ struct Tweet {
         case timestamp
         case uid
     }
-}
-
-extension Tweet: Decodable {
-    init(from decoder: Decoder) throws {
+    
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.content = try container.decode(String.self, forKey: .content)
@@ -54,11 +35,7 @@ extension Tweet: Decodable {
             self.timestamp = Date(timeIntervalSince1970: date)
             self.uid = try container.decode(String.self, forKey: .uid)
         } catch {
-            self.content = ""
-            self.likes = 0
-            self.retweetCount = 0
-            self.timestamp = nil
-            self.uid = ""
+            print(error)
         }
     }
 }
