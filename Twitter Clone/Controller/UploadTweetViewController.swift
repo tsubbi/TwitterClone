@@ -75,7 +75,7 @@ class UploadTweetViewController: UIViewController {
         stackView.spacing = 12
         self.view.addSubview(stackView)
         // the image has been cashed by sdwebimage lib
-        self.profileImageView.sd_setImage(with: self.profile.user?.profileImageUrl, completed: nil)
+        self.profileImageView.sd_setImage(with: self.profile.modelData.profileImageUrl, completed: nil)
         layoutUI()
     }
     

@@ -28,7 +28,7 @@ class FeedController: UICollectionViewController {
     var userProfile: UserProfile? {
         didSet {
             // after user is being added, get profile images and display at navigation bar
-            guard let user = self.userProfile?.user else { return }
+            guard let user = self.userProfile?.modelData else { return }
             // fetch user profile image
             self.profileImageView.sd_setImage(with: user.profileImageUrl) { (image, error, type, url) in
                 // when fetched, update ui

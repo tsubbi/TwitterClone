@@ -23,11 +23,14 @@ struct TweetService {
     
     func fetchTweets(completion block:@escaping ([TweetViewModel]) -> Void) {
         var tweets: [TweetViewModel] = []
+        // fetch the avalible tweets that is database
         FirDatabase.shared.fetchTweet(of: .tweets) { (snapshots) in
+            // key is the tweet id
             let tweetID = snapshots.key
-            let tweetData = TweetData(id: tweetID, tweetData: snapshots.value as Any)
-            
-            UserService.shared.fetchUser(uid: tweetData.tweetContent.uid) { (profile) in
+            // convert snapshot to tweet model
+            let tweetData = TweetData(id: tweetID, snapshotData: snapshots.value as Any)
+            // get the user who wrote the tweet and return as the view model for display
+            UserService.shared.fetchUser(uid: tweetData.modelData.uid) { (profile) in
                 let tweetViewModel = TweetViewModel(tweet: tweetData, user: profile)
                 tweets.append(tweetViewModel)
                 block(tweets)

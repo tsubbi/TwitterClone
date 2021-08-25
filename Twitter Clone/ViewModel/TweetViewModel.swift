@@ -11,12 +11,12 @@ struct TweetViewModel {
     let tweetData: TweetData
     let userProfile: UserProfile
     var profileImageURL: URL? {
-        return userProfile.user?.profileImageUrl
+        return userProfile.modelData.profileImageUrl
     }
     var userInfo: NSAttributedString {
-        let title = NSMutableAttributedString(string: userProfile.user?.fullName ?? "",
+        let title = NSMutableAttributedString(string: userProfile.modelData.fullName,
                                               attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
-        title.append(NSAttributedString(string: " @\(userProfile.user?.userName ?? "")",
+        title.append(NSAttributedString(string: " @\(userProfile.modelData.userName)",
                                         attributes: [.foregroundColor: UIColor.lightGray,
                                                      .font: UIFont.systemFont(ofSize: 14)]))
         if let dateStr = self.timestamp {
@@ -27,17 +27,20 @@ struct TweetViewModel {
         
         return title
     }
+    
     var tweetContent: String? {
-        return tweetData.tweetContent.content
+        return tweetData.modelData.content
     }
+    
     private var timestamp: String? {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
         formatter.maximumUnitCount = 1
         formatter.unitsStyle = .abbreviated
         let now = Date()
-        
-        return formatter.string(from: tweetData.tweetContent.timestamp, to: now)
+        // if unable to obtain the timestamp from database, return nil
+        guard let dataTime = tweetData.modelData.timestamp else { return nil }
+        return formatter.string(from: dataTime, to: now)
     }
     
     init(tweet data: TweetData, user profile: UserProfile) {

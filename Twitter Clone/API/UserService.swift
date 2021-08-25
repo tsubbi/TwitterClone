@@ -14,7 +14,7 @@ struct UserService {
     /// - Parameter completion: actions after the process is completed
     func fetchUser(uid: String, completion: @escaping (UserProfile) -> Void) {
         FirDatabase.shared.getReference(of: .users, with: uid).observeSingleEvent(of: .value) { (snapShot) in
-            let userProfile = UserProfile(uid: uid, user: snapShot.value as Any)
+            let userProfile = UserProfile(id: uid, snapshotData: snapShot.value as Any)
             completion(userProfile)
         }
     }
